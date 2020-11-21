@@ -1,0 +1,30 @@
+name: Deploy to GH pages
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploy
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14'
+      - name: Install yarn
+        run: npm install -g yarn
+      - name: Install Packages
+        run: yarn install
+      - name: Setup git config
+        run: |
+          git config --local user.name "Syed Sirajul Islam Anik"
+          git config --local user.email "bot@example.com"
+          git remote set-url origin https://${{secrets.GH_PAT}}@github.com/ssi-anik/bd-income-tax-calculator.git
+      - name: Build & deploy
+        run: |
+          yarn run build
+          yarn run deploy
