@@ -26,7 +26,7 @@ export default function TopNav() {
             Star me on GitHub
         </a>
 
-        <Modal show={show} keyboard={true} onHide={handleClose} backdrop="static">
+        <Modal show={show} keyboard={true} animation={false} onHide={handleClose} backdrop="static">
             <Modal.Header closeButton>
                 <Modal.Title>Disclaimer</Modal.Title>
             </Modal.Header>
