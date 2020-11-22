@@ -1,4 +1,5 @@
 import {useRef, useState} from "react";
+import {Col, Form, Row} from "react-bootstrap";
 
 export default function UserInformation(props) {
     const {handleInputChange} = props;
@@ -35,39 +36,40 @@ export default function UserInformation(props) {
         }));
 
         handleInputChange('lowerBound', calculateLowerBound());
-        handleInputChange('minimumTax', minimumTaxRef.current.value);
+        handleInputChange('minimumTax', parseInt(minimumTaxRef.current.value || 0));
     }
 
 
-    return <div className="col-12">
-        <form onSubmit={(e) => e.preventDefault()}>
-            <div className="form-row">
-                <div className="form-group col-4">
-                    <select className="form-control" value={values['privilege']}
-                            ref={privilegeRef}
-                            onChange={() => handleChange('privilege', privilegeRef.current.value)}>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                        <option value="specially-abled">Specially-abled</option>
-                        <option value="freedom-fighter">Gazetted freedom fighter</option>
-                    </select>
-                </div>
-                <div className="form-group col-4">
-                    <select value={values['ageGroup']}
-                            ref={ageGroupRef}
-                            onChange={() => handleChange('ageGroup', ageGroupRef.current.value)}
-                            className="form-control">
-                        <option value="below">Below or 65</option>
-                        <option value="above">Above 65</option>
-                    </select>
-                </div>
-                <div className="form-group col-4">
-                    <input defaultValue={values['minimumTax']}
-                           onChange={() => handleChange('minimumTax', minimumTaxRef.current.value)}
-                           type="number" ref={minimumTaxRef} className="form-control" min="0"
-                           placeholder="Minimum tax in your area"/>
-                </div>
-            </div>
-        </form>
-    </div>;
+    return <Row>
+        <Col xs="12">
+            <form onSubmit={(e) => e.preventDefault()}>
+                <Form.Row>
+                    <Form.Group className="col-4">
+                        <Form.Control as="select" value={values['privilege']}
+                                      ref={privilegeRef}
+                                      onChange={() => handleChange('privilege', privilegeRef.current.value)}>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="specially-abled">Specially-abled</option>
+                            <option value="freedom-fighter">Gazetted freedom fighter</option>
+                        </Form.Control>
+                    </Form.Group>
+                    <Form.Group className="col-4">
+                        <Form.Control as="select" value={values['ageGroup']}
+                                      ref={ageGroupRef}
+                                      onChange={() => handleChange('ageGroup', ageGroupRef.current.value)}>
+                            <option value="below">Below or 65</option>
+                            <option value="above">Above 65</option>
+                        </Form.Control>
+                    </Form.Group>
+                    <Form.Group className="col-4">
+                        <Form.Control defaultValue={values['minimumTax']}
+                                      onChange={() => handleChange('minimumTax', minimumTaxRef.current.value)}
+                                      type="number" ref={minimumTaxRef} min="0"
+                                      placeholder="Minimum tax in your area"/>
+                    </Form.Group>
+                </Form.Row>
+            </form>
+        </Col>
+    </Row>;
 }
