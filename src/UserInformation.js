@@ -16,7 +16,7 @@ export default function UserInformation(props) {
 
     function calculateLowerBound() {
         const [privilege, ageGroup] = [privilegeRef.current.value, ageGroupRef.current.value];
-        
+
         if (privilege === 'specially-abled') {
             return 450000;
         } else if (privilege === 'freedom-fighter') {
@@ -40,7 +40,7 @@ export default function UserInformation(props) {
 
 
     return <div className="col-12">
-        <form>
+        <form onSubmit={(e) => e.preventDefault()}>
             <div className="form-row">
                 <div className="form-group col-4">
                     <select className="form-control" value={values['privilege']}
