@@ -9,12 +9,13 @@ function App() {
     const [values, setValues] = useState({
         lowerBound: 300000,
         minimumTax: 5000,
+        companies: [],
     });
 
     function handleInputChange(field, value) {
         setValues(prev => ({
             ...prev,
-            [field]: field === 'companies' ? prev['companies'].append(value) : value
+            [field]: field === 'companies' ? [...prev['companies'], value] : value
         }));
     }
 

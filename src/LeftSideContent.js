@@ -1,10 +1,9 @@
-import {Row} from "react-bootstrap";
 import UserInformation from "./UserInformation";
+import SalaryInformation from "./SalaryInformation";
 
 export default function LeftSideContent(props) {
     return <div>
-        <Row>
-            <UserInformation handleInputChange={props.handleInputChange}/>
-        </Row>
+        <UserInformation handleInputChange={props.handleInputChange}/>
+        <SalaryInformation handleInputChange={props.handleInputChange}/>
     </div>;
 }
