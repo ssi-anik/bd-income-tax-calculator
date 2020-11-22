@@ -2,27 +2,31 @@ import {Button, Col, Form, Row, Table} from "react-bootstrap";
 import {useRef, useState} from "react";
 
 export default function SalaryInformation(props) {
-    const companyNameRef = useRef();
-    const monthsRef = useRef();
-    const totalFestivalsRef = useRef();
-    const calculationTypeRef = useRef();
-    const salaryInputRef = useRef();
+    const [companyNameRef, monthsRef, totalFestivalsRef, calculationTypeRef] = [useRef(), useRef(), useRef(), useRef()];
+    const [companyInfoRef, salaryInputRef] = [useRef(), useRef()];
 
     const [basicRef, houseRef, medicalRef, conveyanceRef] = [useRef(), useRef(), useRef(), useRef()];
     const [lfaRef, festivalRef, otherTaxableRef] = [useRef(), useRef(), useRef()];
 
-    const [values, setValues] = useState({
+    const initialCompanyInfo = {
         company: '',
         months: 12,
         festivals: 2,
         calculationType: 'monthly'
-    });
+    };
+    const [values, setValues] = useState(initialCompanyInfo);
 
     const handleChange = (name, value) => {
         setValues(prevState => ({
             ...prevState,
             [name]: value
         }));
+    }
+
+    const resetForms = () => {
+        salaryInputRef.current.reset();
+        // for some reasons, company info refs were not working. IDK
+        setValues({...initialCompanyInfo});
     }
 
     const calculateTaxableAmount = () => {
@@ -41,6 +45,11 @@ export default function SalaryInformation(props) {
             festivalRef,
             otherTaxableRef
         ].map((i) => parseInt(i.current.value || 0, 10));
+
+        if (!basic) {
+            alert('Basic is zero. Add some data.');
+            return;
+        }
 
         // if it's given annually, multiplication should be done with months
         const multiplier = (values['calculationType'] === 'yearly') ? monthsRef.current.value : 1;
@@ -91,13 +100,13 @@ export default function SalaryInformation(props) {
         }
 
         props.handleInputChange("companies", amounts);
-        salaryInputRef.current.reset();
+        resetForms();
     }
 
     return <Row>
         <Col xs="12">
             {/*COMPANY INFORMATION FORM*/}
-            <Form onSubmit={e => e.preventDefault()}>
+            <Form ref={companyInfoRef} onSubmit={e => e.preventDefault()}>
                 <Form.Row>
                     <Form.Group className="col-3">
                         <Form.Control ref={companyNameRef} value={values['company']}
@@ -197,7 +206,7 @@ export default function SalaryInformation(props) {
                     </tbody>
                 </Table>
 
-                <Button type="reset" variant="warning" size="sm" className="float-left">
+                <Button onClick={resetForms} variant="warning" size="sm" className="float-left">
                     Reset above data
                 </Button>
                 <Button type="submit" size="sm" variant="primary" className="float-right">
