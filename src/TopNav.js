@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {Button, Modal, Nav, Navbar} from "react-bootstrap";
+import 'github-fork-ribbon-css/gh-fork-ribbon.css';
 
 export default function TopNav() {
     const [show, setShow] = useState(false);
@@ -17,6 +18,13 @@ export default function TopNav() {
                 </Nav>
             </Navbar.Collapse>
         </Navbar>
+
+        <a target = "_blank" className = "github-fork-ribbon right-top fixed"
+           href = "https://github.com/ssi-anik/bd-income-tax-calculator"
+           rel = "noopener noreferrer"
+           data-ribbon = "Star me on GitHub" title = "Star me on GitHub">
+            Star me on GitHub
+        </a>
 
         <Modal show={show} keyboard={true} onHide={handleClose} backdrop="static">
             <Modal.Header closeButton>
