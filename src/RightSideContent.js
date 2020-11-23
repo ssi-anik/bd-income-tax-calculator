@@ -238,10 +238,10 @@ export default function RightSideContent(props) {
                 <Table size="sm">
                     <thead>
                         <tr>
-                            <th>Total Income (BDT.)</th>
+                            <th>Total Income</th>
                             <th>Percentage</th>
-                            <th>Calculated Tax(BDT.)</th>
-                            <th>Remains(BDT.)</th>
+                            <th>Calculated Tax</th>
+                            <th>Remaining</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -250,8 +250,8 @@ export default function RightSideContent(props) {
                                 return <tr key={k}>
                                     <td>{slab.text}</td>
                                     <td className="text-center">{slab.as}</td>
-                                    <td className="text-center">{slab.tax}</td>
-                                    <td>{slab.remains}</td>
+                                    <td className="text-right">{slab.tax}</td>
+                                    <td className="text-right">{slab.remains}</td>
                                 </tr>
                             })
                         }
@@ -280,7 +280,7 @@ export default function RightSideContent(props) {
                             <td></td>
                         </tr>
                         <tr>
-                            <td><b>Tax liability</b></td>
+                            <td><b>Net Tax liability</b></td>
                             <td></td>
                             <td className="text-right">
                                 <b> = {finalLiability}</b>
