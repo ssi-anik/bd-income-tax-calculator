@@ -53,6 +53,9 @@ export default function UserInformation(props) {
                             <option value="specially-abled">Specially-abled</option>
                             <option value="freedom-fighter">Gazetted freedom fighter</option>
                         </Form.Control>
+                        <Form.Text className="text-info">
+                            Gender/Privilege
+                        </Form.Text>
                     </Form.Group>
                     <Form.Group className="col-4">
                         <Form.Control as="select" value={values['ageGroup']}
@@ -61,12 +64,19 @@ export default function UserInformation(props) {
                             <option value="below">Below or 65</option>
                             <option value="above">Above 65</option>
                         </Form.Control>
+                        <Form.Text className="text-info">
+                            Age group
+                        </Form.Text>
                     </Form.Group>
                     <Form.Group className="col-4">
                         <Form.Control defaultValue={values['minimumTax']}
                                       onChange={() => handleChange('minimumTax', minimumTaxRef.current.value)}
                                       type="number" ref={minimumTaxRef} min="0"
                                       placeholder="Minimum tax in your area"/>
+
+                        <Form.Text className="text-info">
+                            Minimum tax in your area
+                        </Form.Text>
                     </Form.Group>
                 </Form.Row>
             </form>
