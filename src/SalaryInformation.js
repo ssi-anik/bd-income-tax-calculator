@@ -48,7 +48,7 @@ export default function SalaryInformation(props) {
 
         let festivalMultiplier = 1;
         let basicMultiplier = 1;
-        if (values['inputType'] == 'monthly') {
+        if (values['inputType'] === 'monthly') {
             festivalMultiplier = values['festivals'];
             basicMultiplier = values['months'];
         }
@@ -167,7 +167,6 @@ export default function SalaryInformation(props) {
                 </Form.Row>
             </Form>
         </Col>
-
         {/* Salary Information */}
         <Col xs="12">
             <Form ref={salaryInputRef} onSubmit={e => {

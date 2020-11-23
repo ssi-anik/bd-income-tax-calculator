@@ -11,8 +11,10 @@ function App() {
         minimumTax: 5000,
         companies: [],
     });
+    const {companies} = values;
 
     function handleInputChange(field, value) {
+        console.log(field, value);
         setValues(prev => ({
             ...prev,
             [field]: field === 'companies' ? [...prev['companies'], value] : value
@@ -27,6 +29,7 @@ function App() {
                     <Col xs={8}>
                         <LeftSideContent
                             handleInputChange={handleInputChange}
+                            companies = {companies}
                         />
                     </Col>
                     <Col xs={4}>
