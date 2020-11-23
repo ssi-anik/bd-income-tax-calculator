@@ -120,7 +120,16 @@ export default function SalaryInformation(props) {
             },
         }
 
-        amounts['liability'] = amounts.festival.taxable + amounts.others.taxable +
+
+        amounts['gross'] = amounts.festival.yearly + amounts.others.yearly +
+            amounts.basic.yearly + amounts.house.yearly +
+            amounts.medical.yearly + amounts.conveyance.yearly + amounts.lfa.yearly;
+
+        amounts['net_exempted'] = amounts.festival.exempted + amounts.others.exempted +
+            amounts.basic.exempted + amounts.house.exempted +
+            amounts.medical.exempted + amounts.conveyance.exempted + amounts.lfa.exempted;
+
+        amounts['net_taxable'] = amounts.festival.taxable + amounts.others.taxable +
             amounts.basic.taxable + amounts.house.taxable +
             amounts.medical.taxable + amounts.conveyance.taxable + amounts.lfa.taxable;
 
