@@ -1,23 +1,20 @@
 {
   "files": {
-    "main.css": "/bd-income-tax-calculator/static/css/main.ab7136cd.chunk.css",
-    "main.js": "/bd-income-tax-calculator/static/js/main.e5fc58dd.chunk.js",
-    "main.js.map": "/bd-income-tax-calculator/static/js/main.e5fc58dd.chunk.js.map",
-    "runtime-main.js": "/bd-income-tax-calculator/static/js/runtime-main.581794e9.js",
-    "runtime-main.js.map": "/bd-income-tax-calculator/static/js/runtime-main.581794e9.js.map",
-    "static/js/2.b76fab6c.chunk.js": "/bd-income-tax-calculator/static/js/2.b76fab6c.chunk.js",
-    "static/js/2.b76fab6c.chunk.js.map": "/bd-income-tax-calculator/static/js/2.b76fab6c.chunk.js.map",
-    "static/js/3.7bd1f19b.chunk.js": "/bd-income-tax-calculator/static/js/3.7bd1f19b.chunk.js",
-    "static/js/3.7bd1f19b.chunk.js.map": "/bd-income-tax-calculator/static/js/3.7bd1f19b.chunk.js.map",
+    "main.js": "/bd-income-tax-calculator/static/js/main.1bd6fef9.chunk.js",
+    "main.js.map": "/bd-income-tax-calculator/static/js/main.1bd6fef9.chunk.js.map",
+    "runtime-main.js": "/bd-income-tax-calculator/static/js/runtime-main.c5b65d42.js",
+    "runtime-main.js.map": "/bd-income-tax-calculator/static/js/runtime-main.c5b65d42.js.map",
+    "static/css/2.9e6ef2a9.chunk.css": "/bd-income-tax-calculator/static/css/2.9e6ef2a9.chunk.css",
+    "static/js/2.5a46f3e8.chunk.js": "/bd-income-tax-calculator/static/js/2.5a46f3e8.chunk.js",
+    "static/js/2.5a46f3e8.chunk.js.map": "/bd-income-tax-calculator/static/js/2.5a46f3e8.chunk.js.map",
     "index.html": "/bd-income-tax-calculator/index.html",
-    "static/css/main.ab7136cd.chunk.css.map": "/bd-income-tax-calculator/static/css/main.ab7136cd.chunk.css.map",
-    "static/js/2.b76fab6c.chunk.js.LICENSE.txt": "/bd-income-tax-calculator/static/js/2.b76fab6c.chunk.js.LICENSE.txt",
-    "static/media/logo.103b5fa1.svg": "/bd-income-tax-calculator/static/media/logo.103b5fa1.svg"
+    "static/css/2.9e6ef2a9.chunk.css.map": "/bd-income-tax-calculator/static/css/2.9e6ef2a9.chunk.css.map",
+    "static/js/2.5a46f3e8.chunk.js.LICENSE.txt": "/bd-income-tax-calculator/static/js/2.5a46f3e8.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.581794e9.js",
-    "static/js/2.b76fab6c.chunk.js",
-    "static/css/main.ab7136cd.chunk.css",
-    "static/js/main.e5fc58dd.chunk.js"
+    "static/js/runtime-main.c5b65d42.js",
+    "static/css/2.9e6ef2a9.chunk.css",
+    "static/js/2.5a46f3e8.chunk.js",
+    "static/js/main.1bd6fef9.chunk.js"
   ]
 }
