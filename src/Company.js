@@ -12,7 +12,7 @@ export default function Company(props) {
     return <Table size="sm" style={{paddingTop: 5, borderTop: '#000 2px solid'}}>
         <thead>
             <tr>
-                <th>As</th>
+                <th>As (in {company.name})</th>
                 <th>Received Income (BDT.)</th>
                 <th>Max exempted Income (BDT.)</th>
                 <th>Net Taxable Amount (BDT.)</th>

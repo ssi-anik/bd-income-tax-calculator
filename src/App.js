@@ -30,7 +30,6 @@ function App() {
     const {companies} = values;
 
     function handleInputChange(field, value) {
-        console.log(field, value);
         setValues(prev => ({
             ...prev,
             [field]: field === 'companies' ? [...prev['companies'], value] : value
