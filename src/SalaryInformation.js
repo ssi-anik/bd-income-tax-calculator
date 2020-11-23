@@ -152,12 +152,12 @@ export default function SalaryInformation(props) {
                                       onChange={(e) => handleChange('months', e.target.value)}
                                       placeholder="Months you've worked for"/>
                     </Form.Group>
-                    <Form.Group className="col-3">
+                    <Form.Group className="col-2">
                         <Form.Control type="number" min="0" value={values['festivals']} ref={totalFestivalsRef}
                                       onChange={(e) => handleChange('festivals', e.target.value)}
                                       placeholder="No of Festivals"/>
                     </Form.Group>
-                    <Form.Group className="col-3">
+                    <Form.Group className="col-4">
                         <Form.Control as="select" ref={inputTypeRef} value={values['inputType']}
                                       onChange={(e) => handleChange('inputType', e.target.value)}>
                             <option value="monthly">Calculate from Monthly</option>
