@@ -68,7 +68,7 @@ export default function Company(props) {
                 <td><b>{company.net_taxable}</b></td>
             </tr>
             <tr>
-                <td colspan="4" className="text-right">
+                <td colSpan="4" className="text-right">
                     <Button onClick={() => removeCompany(company.id, company.name)} size="sm" variant="danger" block>
                         Remove [{company.name}'s monthly earnings -
                         {` ${company.months}`} months -
