@@ -166,7 +166,7 @@ export default function SalaryInformation(props) {
             </Form>
         </Col>
         {/* Salary Information */}
-        <Col xs="12">
+        <Col xs="12" style={{display: values['company'] ? 'block' : 'none'}}>
             <Form ref={salaryInputRef} onSubmit={e => {
                 e.preventDefault();
                 calculateTaxableAmount();
