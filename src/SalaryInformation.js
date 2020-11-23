@@ -144,16 +144,25 @@ export default function SalaryInformation(props) {
                         <Form.Control ref={companyNameRef} value={values['company']}
                                       onChange={(e) => handleChange('company', e.target.value.trim())}
                                       placeholder="Company name"/>
+                        <Form.Text className="text-info">
+                            Company name
+                        </Form.Text>
                     </Form.Group>
                     <Form.Group className="col-3">
                         <Form.Control type="number" min="0" value={values['months']} ref={monthsRef}
                                       onChange={(e) => handleChange('months', e.target.value)}
                                       placeholder="Months you've worked for"/>
+                        <Form.Text className="text-info">
+                            Number of months
+                        </Form.Text>
                     </Form.Group>
                     <Form.Group className="col-2">
                         <Form.Control type="number" min="0" value={values['festivals']} ref={totalFestivalsRef}
                                       onChange={(e) => handleChange('festivals', e.target.value)}
                                       placeholder="No of Festivals"/>
+                        <Form.Text className="text-info">
+                            Number of festivals
+                        </Form.Text>
                     </Form.Group>
                     <Form.Group className="col-4">
                         <Form.Control as="select" ref={inputTypeRef} value={values['inputType']}
@@ -161,6 +170,9 @@ export default function SalaryInformation(props) {
                             <option value="monthly">Calculate from Monthly</option>
                             <option value="yearly">Calculate for specified months</option>
                         </Form.Control>
+                        <Form.Text className="text-info">
+                            Calculation type
+                        </Form.Text>
                     </Form.Group>
                 </Form.Row>
             </Form>
