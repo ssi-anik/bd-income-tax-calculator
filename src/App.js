@@ -21,15 +21,23 @@ function App() {
         }));
     }
 
+    function removeCompany(id) {
+        setValues(prev => ({
+            ...prev,
+            ['companies']: prev['companies'].filter(c => c.id != id),
+        }))
+    }
+
     return (
         <>
             <TopNav/>
             <Container fluid>
                 <Row style={{marginTop: 3}}>
-                    <Col xs={8}>
+                    <Col xs={12} md="8">
                         <LeftSideContent
                             handleInputChange={handleInputChange}
-                            companies = {companies}
+                            companies={companies}
+                            removeCompany={removeCompany}
                         />
                     </Col>
                     <Col xs={4}>

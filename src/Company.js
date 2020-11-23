@@ -1,11 +1,15 @@
-import {Table} from "react-bootstrap";
+import {Button, Table} from "react-bootstrap";
 
 export default function Company(props) {
     const company = props.company;
 
+    const removeCompany = (id, name) => {
+        if (window.confirm(`Remove ${name} from the list?`)) {
+            props.removeCompany(id);
+        }
+    }
+
     return <Table size="sm" style={{paddingTop: 5, borderTop: '#000 2px solid'}}>
-        <caption>Monthly earnings at "{company.name}" - [{company.months} months] - [{company.festivals} festivals]
-        </caption>
         <thead>
             <tr>
                 <th>As</th>
@@ -62,6 +66,15 @@ export default function Company(props) {
                 <td><b>{company.gross}</b></td>
                 <td><b>{company.net_exempted}</b></td>
                 <td><b>{company.net_taxable}</b></td>
+            </tr>
+            <tr>
+                <td colspan="4" className="text-right">
+                    <Button onClick={() => removeCompany(company.id, company.name)} size="sm" variant="danger" block>
+                        Remove [{company.name}'s monthly earnings -
+                        {` ${company.months}`} months -
+                        {` ${company.festivals}`} festivals] from this list
+                    </Button>
+                </td>
             </tr>
         </tbody>
     </Table>;
