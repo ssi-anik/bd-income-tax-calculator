@@ -70,12 +70,10 @@ export default function SalaryInformation(props) {
         }
 
         /**
-         * Calculate the max amount, based on input
-         * If chosen yearly, grab the yearly max
-         * If chosen monthly, get the monthly max
+         * As the payments are already converted to yearly,
+         * Change the max values to yearly as well.
          */
-        const units = values['inputType'] === 'yearly' ? monthsRef.current.value : 1;
-        const [houseMax, medicalMax, conveyanceMax] = [25000, 10000, 2500].map(i => i * units);
+        const [houseMax, medicalMax, conveyanceMax] = [25000, 10000, 2500].map(i => i * monthsRef.current.value);
 
         const amounts = {
             id: new Date().getTime(),
