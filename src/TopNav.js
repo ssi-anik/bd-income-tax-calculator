@@ -2,19 +2,27 @@ import React, {useState} from 'react';
 import {Button, Modal, Nav, Navbar} from "react-bootstrap";
 import 'github-fork-ribbon-css/gh-fork-ribbon.css';
 
-export default function TopNav() {
+export default function TopNav(props) {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    const {lifetime, daily} = props;
 
     return <>
         <Navbar bg="dark" variant="dark" expand="lg">
             <Navbar.Brand href="./">BD Income tax calculator</Navbar.Brand>
             <Navbar.Toggle aria-controls="navbar-nav"/>
             <Navbar.Collapse id="navbar-nav">
-                <Nav className="mr-auto">
-                    <Nav.Link onClick={handleShow}>Disclaimer</Nav.Link>
+                <Nav className="mr-1">
+                    <Nav.Link className="text-warning" onClick={handleShow}>Disclaimer</Nav.Link>
+                </Nav>
+                <Nav className="mr-2 ml-2">
+                    <Navbar.Text className="text-white">Lifetime visitor: {lifetime}</Navbar.Text>
+                </Nav>
+                <Nav className="mr-2 ml-2">
+                    <Navbar.Text className="text-white">Daily Visitor: {daily}</Navbar.Text>
                 </Nav>
             </Navbar.Collapse>
         </Navbar>
