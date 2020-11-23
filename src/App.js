@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {Col, Container, Row} from "react-bootstrap";
 import TopNav from "./TopNav";
 import LeftSideContent from "./LeftSideContent";
+import RightSideContent from "./RightSideContent";
 
 function App() {
 
@@ -40,8 +41,10 @@ function App() {
                             removeCompany={removeCompany}
                         />
                     </Col>
-                    <Col xs={4}>
-                        Right side bar
+                    <Col xs={12} md="4">
+                        <RightSideContent
+                            values={values}
+                        />
                     </Col>
                 </Row>
             </Container>
