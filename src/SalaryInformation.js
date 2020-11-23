@@ -2,7 +2,7 @@ import {Button, Col, Form, Row, Table} from "react-bootstrap";
 import {useRef, useState} from "react";
 
 export default function SalaryInformation(props) {
-    const [companyNameRef, monthsRef, totalFestivalsRef, calculationTypeRef] = [useRef(), useRef(), useRef(), useRef()];
+    const [companyNameRef, monthsRef, totalFestivalsRef, inputTypeRef] = [useRef(), useRef(), useRef(), useRef()];
     const [companyInfoRef, salaryInputRef] = [useRef(), useRef()];
 
     const [basicRef, houseRef, medicalRef, conveyanceRef] = [useRef(), useRef(), useRef(), useRef()];
@@ -12,7 +12,7 @@ export default function SalaryInformation(props) {
         company: '',
         months: 12,
         festivals: 2,
-        calculationType: 'monthly'
+        inputType: 'monthly'
     };
     const [values, setValues] = useState(initialCompanyInfo);
 
@@ -29,75 +29,100 @@ export default function SalaryInformation(props) {
         setValues({...initialCompanyInfo});
     }
 
+    const calculateTaxableOf = (basic, percent, max, received) => {
+        const atMax = percent ? Math.min(basic * percent, max) : max;
+        return received > atMax ? received - atMax : 0;
+    }
+
+    const calculateMaxExemptionOf = (basic, percent, max, received) => {
+        const atMax = percent ? Math.min(basic * percent, max) : max;
+        return received > atMax ? atMax : received;
+    }
+
     const calculateTaxableAmount = () => {
 
         if (!values['company']) {
-            alert('Add a company name');
+            alert('Add a company name.');
             return false;
         }
 
-        const [basic, house, medical, conveyance, lfa, festival, others] = [
+        let festivalMultiplier = 1;
+        let basicMultiplier = 1;
+        if (values['inputType'] == 'monthly') {
+            festivalMultiplier = values['festivals'];
+            basicMultiplier = values['months'];
+        }
+
+        // already converted to yearly
+        const [basic, house, medical, conveyance, lfa] = [
             basicRef,
             houseRef,
             medicalRef,
             conveyanceRef,
             lfaRef,
-            festivalRef,
-            otherTaxableRef
-        ].map((i) => parseInt(i.current.value || 0, 10));
+        ].map((i) => parseInt(i.current.value || 0, 10) * basicMultiplier);
+        const festival = parseInt(festivalRef.current.value || 0, 10) * festivalMultiplier;
+        const others = parseInt(otherTaxableRef.current.value || 0, 10);
 
         if (!basic) {
-            alert('Basic is zero. Add some data.');
+            alert('Basic salary is zero. Add some data.');
             return;
         }
 
-        // if it's given annually, multiplication should be done with months
-        const multiplier = (values['calculationType'] === 'yearly') ? monthsRef.current.value : 1;
-        // based on calculation type, max exempted amount
-        const [houseMax, medicalMax, conveyanceMax] = [25000, 10000, 2500].map(i => i * multiplier);
+        /**
+         * Calculate the max amount, based on input
+         * If chosen yearly, grab the yearly max
+         * If chosen monthly, get the monthly max
+         */
+        const units = values['inputType'] === 'yearly' ? monthsRef.current.value : 1;
+        const [houseMax, medicalMax, conveyanceMax] = [25000, 10000, 2500].map(i => i * units);
 
         const amounts = {
             id: new Date().getTime(),
             name: values['company'],
             months: values['months'],
             festivals: values['festivals'],
-            calculationType: values['calculationType'],
+            inputType: values['inputType'],
             basic: {
-                actual: basic,
+                yearly: basic,
                 exempted: 0,
-                taxable: basic
+                taxable: basic,
             },
             house: {
-                actual: house,
-                exempted: houseMax > house ? house : houseMax,
-                taxable: houseMax > house ? 0 : (house - houseMax),
+                yearly: house,
+                exempted: calculateMaxExemptionOf(basic, 0.5, houseMax, house),
+                taxable: calculateTaxableOf(basic, 0.5, houseMax, house),
             },
             medical: {
-                actual: medical,
-                exempted: medicalMax > medical ? medical : medicalMax,
-                taxable: medicalMax > medical ? 0 : (medical - medicalMax),
+                yearly: medical,
+                exempted: calculateMaxExemptionOf(basic, 0.1, medicalMax, medical),
+                taxable: calculateTaxableOf(basic, 0.1, medicalMax, medical),
             },
             conveyance: {
-                actual: conveyance,
-                exempted: conveyanceMax > conveyance ? conveyance : conveyanceMax,
-                taxable: conveyanceMax > conveyance ? 0 : (conveyance - conveyanceMax),
+                yearly: conveyance,
+                exempted: calculateMaxExemptionOf(basic, 0, conveyanceMax, conveyance),
+                taxable: calculateTaxableOf(basic, 1, conveyanceMax, conveyance),
             },
             lfa: {
-                actual: lfa,
+                yearly: lfa,
                 exempted: lfa,
                 taxable: 0,
             },
             festival: {
-                actual: festival * (values['calculationType'] === 'yearly' ? 1 : parseInt(totalFestivalsRef.current.value)),
+                yearly: festival,
                 exempted: 0,
-                taxable: festival * (values['calculationType'] === 'yearly' ? 1 : parseInt(totalFestivalsRef.current.value)),
+                taxable: festival,
             },
             others: {
-                actual: others,
+                yearly: others,
                 exempted: 0,
                 taxable: others
             },
         }
+
+        amounts['liability'] = amounts.festival.taxable + amounts.others.taxable +
+            amounts.basic.taxable + amounts.house.taxable +
+            amounts.medical.taxable + amounts.conveyance.taxable + amounts.lfa.taxable;
 
         props.handleInputChange("companies", amounts);
         resetForms();
@@ -124,10 +149,10 @@ export default function SalaryInformation(props) {
                                       placeholder="No of Festivals"/>
                     </Form.Group>
                     <Form.Group className="col-3">
-                        <Form.Control as="select" ref={calculationTypeRef} value={values['calculationType']}
-                                      onChange={(e) => handleChange('calculationType', e.target.value)}>
+                        <Form.Control as="select" ref={inputTypeRef} value={values['inputType']}
+                                      onChange={(e) => handleChange('inputType', e.target.value)}>
                             <option value="monthly">Calculate from Monthly</option>
-                            <option value="yearly">Calculate from Yearly</option>
+                            <option value="yearly">Calculate for specified months</option>
                         </Form.Control>
                     </Form.Group>
                 </Form.Row>
