@@ -70,7 +70,7 @@ export default function Company(props) {
             <tr>
                 <td colSpan="4" className="text-right">
                     <Button onClick={() => removeCompany(company.id, company.name)} size="sm" variant="danger" block>
-                        Remove [{company.name}'s monthly earnings -
+                        Remove [{company.name}'s earnings -
                         {` ${company.months}`} months -
                         {` ${company.festivals}`} festivals] from this list
                     </Button>
