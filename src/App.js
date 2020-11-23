@@ -14,7 +14,7 @@ function today() {
 }
 
 function namespace() {
-    return 'bd-income-tax-calculator-test';
+    return 'bd-income-tax-calculator';
 }
 
 function App() {
