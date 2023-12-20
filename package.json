@@ -1,7 +1,7 @@
 {
     "name": "bd-income-tax-calculator",
     "version": "0.1.0",
-    "homepage": "http://ssi-anik.github.io/bd-income-tax-calculator",
+    "homepage": "http://samhitha_kondeti.github.io/tax_management_system",
     "private": false,
     "dependencies": {
         "@testing-library/jest-dom": "^5.11.4",
